@@ -26,22 +26,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: mongoadmin
       MONGO_INITDB_ROOT_PASSWORD: mongopasswd
     ports:
-      - "27018:27017"
+     - "27018:27017"
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh mongodb://mongoadmin:mongopasswd@mongo_server:27017/cura?authSource=admin --quiet
       interval: 10s
       timeout: 5s
       retries: 5
-
-  app:
-    build: .
-    container_name: cura_c
-    ports:
-      - "8080:8080"
-    env_file:
-      - ./.env # Specify the path to your .env file
-    depends_on:
-      mysql_server:
-        condition: service_healthy
-      mongo_server:
-        condition: service_healthy
