@@ -7,8 +7,3 @@ services:
       - "8080:8080"
     env_file:
       - ./.env # Specify the path to your .env file
-    depends_on:
-      mysql_server:
-        condition: service_healthy
-      mongo_server:
-        condition: service_healthy
